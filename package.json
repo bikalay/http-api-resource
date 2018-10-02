@@ -1,0 +1,40 @@
+{
+  "name": "http-api-resource",
+  "version": "0.0.1",
+  "description": "http resource",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src/ -d dist/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bikalay/http-api-resource.git"
+  },
+  "keywords": [
+    "http",
+    "api",
+    "resource"
+  ],
+  "author": "Alexandr Vovchuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bikalay/http-api-resource/issues"
+  },
+  "homepage": "https://github.com/bikalay/http-api-resource#readme",
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-eslint": "10.0.1",
+    "babel-plugin-add-module-exports": "1.0.0",
+    "babel-plugin-dynamic-import-node": "2.1.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
+    "babel-preset-flow": "6.23.0",
+    "eslint": "5.6.1",
+    "eslint-config-standart": "0.2.0",
+    "eslint-plugin-flowtype": "2.50.3",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jest": "21.24.1",
+    "eslint-plugin-standard": "4.0.0"
+  },
+  "dependencies": {}
+}
