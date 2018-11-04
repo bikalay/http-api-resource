@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src/ -d dist/",
+    "flow": "flow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -34,7 +35,13 @@
     "eslint-plugin-flowtype": "2.50.3",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jest": "21.24.1",
-    "eslint-plugin-standard": "4.0.0"
+    "eslint-plugin-promise": "4.0.1",
+    "eslint-plugin-standard": "4.0.0",
+    "flow-bin": "0.73.0",
+    "flow-declarations": "0.4.20",
+    "jest": "23.6.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "events": "3.0.0"
+  }
 }
