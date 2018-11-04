@@ -23,12 +23,29 @@ export function processUrl(url: string ='', method: string, data: any): string {
     .replace(/\/:[^\&\?\/]+/g, '');
 }
 
+export function pathToQueryParam(path: string) {
+  const fields = path.split('.');
+  let param = fields[0];
+  if(fields.length > 1) {
+    for (let i = 1; i < fields.length; i++) {
+      param = param + '[' + fields[i] + ']';
+    }
+  }
+  return param;
+}
+
+export function isFirstQueryParameter(field: string, url: string) {
+  const firstQuestionMark = url.indexOf('?');
+  const fieldQuestionMark = url.indexOf('?:'+field);
+  return firstQuestionMark < 0 || firstQuestionMark === fieldQuestionMark;
+}
+
 /**
  *
  * @param {string} url
  * @param {string} key
- * @param value
- * @param skip
+ * @param {*} value
+ * @param {boolean} [skip]
  * @returns {string}
  */
 export function updateUrl(url: string, key: string, value: any, skip?: boolean): string {
@@ -37,18 +54,19 @@ export function updateUrl(url: string, key: string, value: any, skip?: boolean):
 
   const paramRegExp = new RegExp('(\/):'+key+'([\/\&\?]|$)','igm');
   const queryRegExp = new RegExp('[\&\?]:'+key, 'igm');
-  let isFirstQueryParameter = !/\?[\w_\$]/.test(url);
+  const _isFirstQueryParameter: boolean = isFirstQueryParameter(key, url);
 
   if(paramRegExp.test(url)) {
     url = url.replace(paramRegExp, '$1'+value+'$2');
     processed = true;
   }
+  key = pathToQueryParam(key);
   if(queryRegExp.test(url)) {
-    url = url.replace(queryRegExp, isFirstQueryParameter ? '?'+key+'='+value : '&'+key+'='+value);
+    url = url.replace(queryRegExp, _isFirstQueryParameter ? '?'+key+'='+value : '&'+key+'='+value);
     processed = true;
   }
   if(!processed) {
-    url = url + (isFirstQueryParameter ? '?'+key+'='+value : '&'+key+'='+value);
+    url = url + (_isFirstQueryParameter ? '?'+key+'='+value : '&'+key+'='+value);
   }
   return url;
 }
@@ -58,7 +76,7 @@ export function objectToParam(url: string, obj: any, key?: ?string, skip?: boole
   for(let i=0, length = fieldNames.length; i<length; i++) {
     let fieldName = fieldNames[i];
     let value = obj[fieldName];
-    let _key = key ? key+'['+fieldName+']' : fieldName;
+    let _key = key ? key+'.'+fieldName : fieldName;
     switch(Object.prototype.toString.call(value)) {
       case '[object Object]':
         url = objectToParam(url, value, _key, skip);

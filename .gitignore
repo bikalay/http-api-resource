@@ -61,7 +61,7 @@ typings/
 .next
 
 #Idea
-.idea
+.idea/
 
 #dist
 dist/*
