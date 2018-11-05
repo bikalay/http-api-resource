@@ -27,9 +27,15 @@ export type ResponseInterceptor = (responseData: ResponseData) => ResponseData;
 export type ProgressInterceptor = (responseData: ProgressData) => ProgressData;
 
 export class InterceptorsContainer {
-  requestInterceptors: Array<RequestInterceptor> = [];
-  responseInterceptors: Array<ResponseInterceptor> = [];
-  progressInterceptors: Array<ProgressInterceptor> = [];
+  requestInterceptors: Array<RequestInterceptor>;
+  responseInterceptors: Array<ResponseInterceptor>;
+  progressInterceptors: Array<ProgressInterceptor>;
+
+  constructor() {
+    this.requestInterceptors = [];
+    this.responseInterceptors = [];
+    this.progressInterceptors = [];
+  }
 
   addRequestInterceptor(interceptor: RequestInterceptor): void {
     this.requestInterceptors.push(interceptor);

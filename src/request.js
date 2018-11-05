@@ -9,7 +9,7 @@ export type XHRRequestOptions = {
 };
 
 export class XHRRequest extends EventEmitter {
-  _xhr: XMLHttpRequest = new XMLHttpRequest();
+  _xhr: XMLHttpRequest;
   method: HTTPMethods;
   url: string;
   headers: {[id: string]: string};
@@ -18,6 +18,7 @@ export class XHRRequest extends EventEmitter {
   total: number;
   constructor(method:HTTPMethods , url:string, headers?:{[id: string]: string} = {}, options?: XHRRequestOptions = {}) {
     super();
+    this._xhr = new XMLHttpRequest();
     this.method = method;
     this.url = url;
     this.headers = headers;
